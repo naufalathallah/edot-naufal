@@ -1,4 +1,5 @@
 import articlePage from "../pageobjects/article.page";
+import homePage from "../pageobjects/home.page";
 
 describe("Module Article", () => {
   it("[key: TC-T1] User dapat mencari dan mengakses detail artikel", async () => {
@@ -30,5 +31,14 @@ describe("Module Article", () => {
     const articleTitle = await $("//section/h1").getText();
 
     await expect(articleTitle).toBe(searchData);
+  });
+
+  it("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
+    await homePage.open();
+
+    await $("//h2[normalize-space(text())='Ready to Grow with eDOT?']").scrollIntoView();
+    await browser.pause(2000);
+    await $("//h2[normalize-space(text())='Ready to Grow with eDOT?']/following-sibling::a").click();
+    await browser.pause(2000);
   });
 });
