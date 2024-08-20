@@ -1,42 +1,23 @@
 import { $ } from "@wdio/globals";
 import Page from "./page";
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class HomePage extends Page {
-  /**
-   * define selectors using getter methods
-   */
-  getAlertButton(type: string) {
-    return $(`//android.widget.Button[@text='${type}']`);
+  get txtReadyToGrow() {
+    return $("//h2[normalize-space(text())='Ready to Grow with eDOT?']");
   }
 
-  get inputUsername() {
-    return $("#username");
+  get btnContactUsSection() {
+    return $("//h2[normalize-space(text())='Ready to Grow with eDOT?']/following-sibling::a");
   }
 
-  get inputPassword() {
-    return $("#password");
+  async openContactUs() {
+    await this.txtReadyToGrow.scrollIntoView();
+    await browser.pause(2000);
+
+    await this.btnContactUsSection.click();
+    await browser.pause(2000);
   }
 
-  get btnSubmit() {
-    return $('button[type="submit"]');
-  }
-
-  /**
-   * a method to encapsule automation code to interact with the page
-   * e.g. to login using username and password
-   */
-  async login(username: string, password: string) {
-    await this.inputUsername.setValue(username);
-    await this.inputPassword.setValue(password);
-    await this.btnSubmit.click();
-  }
-
-  /**
-   * overwrite specific options to adapt it to page object
-   */
   open() {
     return super.open();
   }

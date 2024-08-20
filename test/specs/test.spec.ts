@@ -1,5 +1,6 @@
 import articleDetailPage from "../pageobjects/article-detail.page";
 import articlePage from "../pageobjects/article.page";
+import contactUsPage from "../pageobjects/contact-us.page";
 import homePage from "../pageobjects/home.page";
 
 describe("3 TC AT", () => {
@@ -18,28 +19,12 @@ describe("3 TC AT", () => {
     await expect(articleTitle).toBe(searchData);
   });
 
-  it("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
+  it.only("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
     await homePage.open();
 
-    await $("//h2[normalize-space(text())='Ready to Grow with eDOT?']").scrollIntoView();
-    await browser.pause(2000);
-    await $("//h2[normalize-space(text())='Ready to Grow with eDOT?']/following-sibling::a").click();
-    await browser.pause(2000);
-    await $(`[name="name"]`).setValue("Nama AT");
-    await $(`[name="email"]`).setValue("palat@yopamil.com");
-    await $(`[name="phone"]`).setValue(-8576878987);
-    await browser.pause(2000);
-    await $(`//label[normalize-space(text())='Solution (optional)']`).scrollIntoView();
-    await $(`[name="company"]`).setValue("Company AT");
-    await $("//label[normalize-space(text())='Number of employees']/following-sibling::div").click();
-    await $("//ul/li[@role='option'][1]").click();
-    await browser.pause(2000);
+    await homePage.openContactUs();
 
-    await $("//label[normalize-space(text())='Solution (optional)']/following-sibling::div").click();
-    await $("//ul/li[@role='option'][1]").click();
-    await $(`[name="question"]`).setValue("Ini deskripsi AT");
-    await $(`[name="question"]`).scrollIntoView();
-    await browser.pause(2000);
+    await contactUsPage.fillContactUs();
 
     await $("//button[@type='submit']").waitForEnabled();
   });
