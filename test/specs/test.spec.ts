@@ -58,4 +58,18 @@ describe("3 TC AT", () => {
 
     await $("//button[@type='submit']").waitForEnabled();
   });
+
+  it("[key: TC-T3] User mengakses privacy policy dari footer", async () => {
+    await homePage.open();
+    await $("//a[normalize-space(text())='Privacy Policy']").scrollIntoView();
+
+    await $("//a[normalize-space(text())='Privacy Policy']").click();
+    await browser.pause(2000);
+
+    const privacyTitle = await $(
+      "//h1[contains(text(), 'Kebijakan Privasi Penggunaan Aplikasi Maupun Layanan Situs')]"
+    );
+
+    await expect(privacyTitle).toBeDisplayed();
+  });
 });
