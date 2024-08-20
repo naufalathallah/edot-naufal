@@ -17,7 +17,7 @@ describe("Module Article", () => {
       }
     });
 
-    await browser.pause(2000);
+    await browser.pause(3000);
 
     const shownData = await $("//li[1]/a/div[2]/div/h2").getText();
     console.log(shownData);
@@ -26,7 +26,7 @@ describe("Module Article", () => {
 
     await $(`//h2[normalize-space(text())='${shownData}']`).click();
 
-    await browser.pause(2000);
+    await browser.pause(3000);
 
     const articleTitle = await $("//section/h1").getText();
 
@@ -40,5 +40,22 @@ describe("Module Article", () => {
     await browser.pause(2000);
     await $("//h2[normalize-space(text())='Ready to Grow with eDOT?']/following-sibling::a").click();
     await browser.pause(2000);
+    await $(`[name="name"]`).setValue("Nama AT");
+    await $(`[name="email"]`).setValue("palat@yopamil.com");
+    await $(`[name="phone"]`).setValue(-8576878987);
+    await browser.pause(2000);
+    await $(`//label[normalize-space(text())='Solution (optional)']`).scrollIntoView();
+    await $(`[name="company"]`).setValue("Company AT");
+    await $("//label[normalize-space(text())='Number of employees']/following-sibling::div").click();
+    await $("//ul/li[@role='option'][1]").click();
+    await browser.pause(2000);
+
+    await $("//label[normalize-space(text())='Solution (optional)']/following-sibling::div").click();
+    await $("//ul/li[@role='option'][1]").click();
+    await $(`[name="question"]`).setValue("Ini deskripsi AT");
+    await $(`[name="question"]`).scrollIntoView();
+    await browser.pause(2000);
+
+    await $("//button[@type='submit']").waitForEnabled();
   });
 });
