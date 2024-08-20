@@ -46,7 +46,7 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: [["./test/examples/satu.spec.ts", "./test/examples/dua.spec.ts"], "./test/examples/tiga.spec.ts"],
+  specs: ["./test/specs/test.spec.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'

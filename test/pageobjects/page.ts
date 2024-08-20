@@ -5,11 +5,50 @@ import { browser } from "@wdio/globals";
  * that is shared across all page objects
  */
 export default class Page {
-  /**
-   * Opens a sub page of the page
-   * @param path path of the sub page (e.g. /path/to/page.html)
-   */
-  open(path: string) {
-    return browser.url(`https://the-internet.herokuapp.com/${path}`);
+  get containerMenu() {
+    return $("//header/ul[2]");
+  }
+
+  async open(path: string = "") {
+    const maxAttempts = 3;
+    let attempts = 0;
+
+    while (attempts < maxAttempts) {
+      attempts++;
+
+      await browser.url(`https://edot.id/${path}`);
+
+      const isLoaded = await browser.waitUntil(
+        async () => {
+          const state = await browser.execute(() => document.readyState);
+          return state === "complete";
+        },
+        {
+          timeout: 15000,
+          timeoutMsg: "Page did not load within 15 seconds",
+        }
+      );
+
+      if (isLoaded) {
+        break;
+      } else if (attempts < maxAttempts) {
+        await browser.refresh();
+      }
+    }
+
+    if (attempts >= maxAttempts) {
+      throw new Error("Page failed to load after multiple attempts");
+    }
+
+    await browser.waitUntil(
+      async () => {
+        const isDisplayed = await this.containerMenu.isDisplayed();
+        return isDisplayed;
+      },
+      {
+        timeout: 15000,
+        timeoutMsg: "Menu did not appear within 15 seconds",
+      }
+    );
   }
 }

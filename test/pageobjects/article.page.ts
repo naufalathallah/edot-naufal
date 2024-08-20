@@ -4,7 +4,7 @@ import Page from "./page";
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class LoginPage extends Page {
+class ArticlePage extends Page {
   /**
    * define selectors using getter methods
    */
@@ -38,8 +38,8 @@ class LoginPage extends Page {
    * overwrite specific options to adapt it to page object
    */
   open() {
-    return super.open("login");
+    return super.open("articles");
   }
 }
 
-export default new LoginPage();
+export default new ArticlePage();
