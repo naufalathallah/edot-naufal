@@ -1,3 +1,4 @@
+import articleDetailPage from "../pageobjects/article-detail.page";
 import articlePage from "../pageobjects/article.page";
 import homePage from "../pageobjects/home.page";
 
@@ -5,30 +6,14 @@ describe("3 TC AT", () => {
   it("[key: TC-T1] User dapat mencari dan mengakses detail artikel", async () => {
     await articlePage.open();
 
-    const searchData = await $("//li[2]/a/div[2]/div/h2").getText();
-    console.log(searchData);
-
-    await $(`[name="searchArticle"]`).setValue(searchData);
-
-    await browser.execute(() => {
-      const submitButton = document.querySelector('input[type="submit"]');
-      if (submitButton) {
-        (submitButton as HTMLElement).click();
-      }
-    });
-
-    await browser.pause(3000);
-
-    const shownData = await $("//li[1]/a/div[2]/div/h2").getText();
-    console.log(shownData);
+    const searchData = await articlePage.getTitleArticleNumberTwo();
+    await articlePage.searchArticle(searchData);
+    const shownData = await articlePage.getTitleArticleNumberOne();
 
     await expect(shownData).toBe(searchData);
 
-    await $(`//h2[normalize-space(text())='${shownData}']`).click();
-
-    await browser.pause(3000);
-
-    const articleTitle = await $("//section/h1").getText();
+    await articlePage.openDetail(shownData);
+    const articleTitle = await articleDetailPage.getTextTitle();
 
     await expect(articleTitle).toBe(searchData);
   });

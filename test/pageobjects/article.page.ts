@@ -1,42 +1,41 @@
 import { $ } from "@wdio/globals";
 import Page from "./page";
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class ArticlePage extends Page {
-  /**
-   * define selectors using getter methods
-   */
-  getAlertButton(type: string) {
-    return $(`//android.widget.Button[@text='${type}']`);
+  getDetailArtikel(title: string) {
+    return $(`//h2[normalize-space(text())='${title}']`);
   }
 
-  get inputUsername() {
-    return $("#username");
+  getTitleArticleNumberOne() {
+    return $("//li[1]/a/div[2]/div/h2").getText();
   }
 
-  get inputPassword() {
-    return $("#password");
+  getTitleArticleNumberTwo() {
+    return $("//li[2]/a/div[2]/div/h2").getText();
   }
 
-  get btnSubmit() {
-    return $('button[type="submit"]');
+  get inputArticle() {
+    return $(`[name="searchArticle"]`);
   }
 
-  /**
-   * a method to encapsule automation code to interact with the page
-   * e.g. to login using username and password
-   */
-  async login(username: string, password: string) {
-    await this.inputUsername.setValue(username);
-    await this.inputPassword.setValue(password);
-    await this.btnSubmit.click();
+  async searchArticle(title: string) {
+    await this.inputArticle.setValue(title);
+
+    await browser.execute(() => {
+      const submitButton = document.querySelector('input[type="submit"]');
+      if (submitButton) {
+        (submitButton as HTMLElement).click();
+      }
+    });
+
+    await browser.pause(3000);
   }
 
-  /**
-   * overwrite specific options to adapt it to page object
-   */
+  async openDetail(title: string) {
+    await this.getDetailArtikel(title).click();
+    await browser.pause(3000);
+  }
+
   open() {
     return super.open("articles");
   }
