@@ -1,7 +1,7 @@
 import articlePage from "../pageobjects/article.page";
 import homePage from "../pageobjects/home.page";
 
-describe("Module Article", () => {
+describe("3 TC AT", () => {
   it("[key: TC-T1] User dapat mencari dan mengakses detail artikel", async () => {
     await articlePage.open();
 
