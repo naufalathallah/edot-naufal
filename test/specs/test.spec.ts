@@ -19,14 +19,13 @@ describe("3 TC AT", () => {
     await expect(articleTitle).toBe(searchData);
   });
 
-  it.only("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
+  it("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
     await homePage.open();
 
     await homePage.openContactUs();
-
     await contactUsPage.fillContactUs();
 
-    await $("//button[@type='submit']").waitForEnabled();
+    await contactUsPage.btnSubmit.waitForEnabled();
   });
 
   it("[key: TC-T3] User mengakses privacy policy dari footer", async () => {
