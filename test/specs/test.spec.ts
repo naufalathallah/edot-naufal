@@ -5,6 +5,10 @@ import homePage from "../pageobjects/home.page";
 import privacyPolicyPage from "../pageobjects/privacy-policy.page";
 
 describe("3 TC AT", () => {
+  beforeEach(async () => {
+    await homePage.open();
+  });
+
   it("[key: TC-T1] User dapat mencari dan mengakses detail artikel", async () => {
     await articlePage.open();
 
@@ -21,8 +25,6 @@ describe("3 TC AT", () => {
   });
 
   it("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
-    await homePage.open();
-
     await homePage.openContactUs();
     await contactUsPage.fillContactUs();
 
@@ -30,7 +32,6 @@ describe("3 TC AT", () => {
   });
 
   it("[key: TC-T3] User mengakses privacy policy dari footer", async () => {
-    await homePage.open();
     await homePage.openFooterPrivacyPolicy();
 
     await expect(privacyPolicyPage.txtTitle).toBeDisplayed();
