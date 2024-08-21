@@ -20,6 +20,7 @@
     "test:suite:example": "wdio run ./wdio.conf.ts --suite example"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "axios": "^1.7.2"
   }
 }
