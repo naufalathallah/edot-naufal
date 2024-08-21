@@ -10,11 +10,22 @@ class HomePage extends Page {
     return $("//h2[normalize-space(text())='Ready to Grow with eDOT?']/following-sibling::a");
   }
 
+  get footerPrivacyPolicy() {
+    return $("//a[normalize-space(text())='Privacy Policy']");
+  }
+
   async openContactUs() {
     await this.txtReadyToGrow.scrollIntoView();
     await browser.pause(2000);
 
     await this.btnContactUsSection.click();
+    await browser.pause(2000);
+  }
+
+  async openFooterPrivacyPolicy() {
+    await this.footerPrivacyPolicy.scrollIntoView();
+    await this.footerPrivacyPolicy.click();
+
     await browser.pause(2000);
   }
 

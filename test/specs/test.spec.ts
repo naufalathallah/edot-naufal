@@ -2,6 +2,7 @@ import articleDetailPage from "../pageobjects/article-detail.page";
 import articlePage from "../pageobjects/article.page";
 import contactUsPage from "../pageobjects/contact-us.page";
 import homePage from "../pageobjects/home.page";
+import privacyPolicyPage from "../pageobjects/privacy-policy.page";
 
 describe("3 TC AT", () => {
   it("[key: TC-T1] User dapat mencari dan mengakses detail artikel", async () => {
@@ -30,15 +31,8 @@ describe("3 TC AT", () => {
 
   it("[key: TC-T3] User mengakses privacy policy dari footer", async () => {
     await homePage.open();
-    await $("//a[normalize-space(text())='Privacy Policy']").scrollIntoView();
+    await homePage.openFooterPrivacyPolicy();
 
-    await $("//a[normalize-space(text())='Privacy Policy']").click();
-    await browser.pause(2000);
-
-    const privacyTitle = await $(
-      "//h1[contains(text(), 'Kebijakan Privasi Penggunaan Aplikasi Maupun Layanan Situs')]"
-    );
-
-    await expect(privacyTitle).toBeDisplayed();
+    await expect(privacyPolicyPage.txtTitle).toBeDisplayed();
   });
 });
