@@ -3,6 +3,7 @@ import articlePage from "../pageobjects/article.page";
 import contactUsPage from "../pageobjects/contact-us.page";
 import homePage from "../pageobjects/home.page";
 import privacyPolicyPage from "../pageobjects/privacy-policy.page";
+import { user } from "../data/user.data";
 
 describe("3 TC AT", () => {
   beforeEach(async () => {
@@ -26,7 +27,7 @@ describe("3 TC AT", () => {
 
   it("[key: TC-T2] User mengakses dan mengisi form Contact Us dari Home", async () => {
     await homePage.openContactUs();
-    await contactUsPage.fillContactUs();
+    await contactUsPage.fillContactUs(user.nama, user.email, user.phone, user.company, user.question);
 
     await contactUsPage.btnSubmit.waitForEnabled();
   });

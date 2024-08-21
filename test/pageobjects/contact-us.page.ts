@@ -42,24 +42,24 @@ class ContactUsPage extends Page {
     return $("//button[@type='submit']");
   }
 
-  async fillContactUs() {
-    await this.inputName.setValue("Nama AT");
-    await this.inputEmail.setValue("palat@yopamil.com");
-    await this.inputPhone.setValue(-8576878987);
+  async fillContactUs(nama: string, email: string, phone: number, company: string, question: string) {
+    await this.inputName.setValue(nama);
+    await this.inputEmail.setValue(email);
+    await this.inputPhone.setValue(phone);
     await browser.pause(2000);
 
     await this.labelSolution.scrollIntoView();
-    await this.inputCompany.setValue("Company AT");
+    await this.inputCompany.setValue(company);
 
     await this.btnEmployees.click();
     await this.ddOptionOne.click();
     await browser.pause(2000);
 
+    await this.inputQuestion.scrollIntoView();
     await this.btnSolution.click();
     await this.ddOptionOne.click();
-    await this.inputQuestion.setValue("Ini deskripsi AT");
+    await this.inputQuestion.setValue(question);
 
-    await this.inputQuestion.scrollIntoView();
     await browser.pause(2000);
   }
 }
