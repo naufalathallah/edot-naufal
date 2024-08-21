@@ -29,7 +29,7 @@ describe("3 TC AT", () => {
     await homePage.openContactUs();
     await contactUsPage.fillContactUs(user.nama, user.email, user.phone, user.company, user.question);
 
-    await contactUsPage.btnSubmit.waitForEnabled();
+    await expect(contactUsPage.btnSubmit).toBeEnabled();
   });
 
   it("[key: TC-T3] User mengakses privacy policy dari footer", async () => {
